@@ -12,6 +12,7 @@ app.server = http.createServer(app);
 app.use(cors());
 
 app.use(bodyParser.json({extended: false}));
+app.use(express.static('dist'));
 
 app.get('/',(req,res)=> res.send("Initial Application"));
 
