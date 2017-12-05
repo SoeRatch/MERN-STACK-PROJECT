@@ -14,6 +14,11 @@ app.use(cors());
 app.use(bodyParser.json({extended: false}));
 app.use(express.static('dist'));
 
+app.post("/api/auth",(req,res)=>{
+	res.status(400).json({errors:{
+		global:"Invalid credentials"
+	}});
+});
 
 app.get('/*', function (req, res) {
    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
