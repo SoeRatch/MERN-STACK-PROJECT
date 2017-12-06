@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Promise from 'bluebird';
 import auth from './routes/auth';
+import users from './routes/users';
 
 dotenv.config();
 const app = express();
@@ -21,6 +22,7 @@ app.use(bodyParser.json({extended: false}));
 mongoose.Promise=Promise;
 
 app.use("/api/auth",auth);
+app.use("/api/users",users);
 
 app.use(express.static('dist'));
 app.get('/*', function (req, res) {
