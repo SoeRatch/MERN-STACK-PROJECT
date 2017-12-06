@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 import {createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
@@ -26,7 +26,7 @@ if(localStorage.bookwormJWT){
 ReactDOM.render(
 	<BrowserRouter>
 		<Provider store={store}>
-			<PensheelApp/>
+			<Route component={PensheelApp}/>
 		</Provider>
 	</BrowserRouter>,
 	document.getElementById('AppRoot')
