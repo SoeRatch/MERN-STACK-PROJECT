@@ -6,7 +6,7 @@ export const userLoggedIn = user =>({
 	user
 });
 
-export const userLoggedOut = user =>({
+export const userLoggedOut = () =>({
 	type:USER_LOGGED_OUT
 });
 

@@ -23,38 +23,9 @@ HomePage.propTypes = {
 	logout:PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps{logout:actions.logout})(HomePage);
+export default connect(mapStateToProps,{logout:actions.logout})(HomePage);
 
 
 
 
 
-
-
-import LoginPage from './LoginPage';
-import GuestRoute from '../routes/GuestRoute';
-import { Icon} from 'semantic-ui-react';
-import { Container} from '../../App.style'
-
-const HomePage = ({isAuthenticated, logout, location}) =>(
-	<div >
-
-
-		
-		{
-			!isAuthenticated &&
-				  <Container>
-				      <GuestRoute location={location} path="/" exact component={LoginPage} />
-				     <Link to='/signup'> 
-					        <Icon size={'huge'} color={'grey'} name='add user' />
-					     </Link>
-				  </Container>
-				  
-				  
-				
-		}
-
-		
-
-	</div>
-);
