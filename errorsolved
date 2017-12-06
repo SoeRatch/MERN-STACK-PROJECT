@@ -15,3 +15,11 @@
 */
 
 =>A very big error on routes - getting cannot found on refreshing solved working on server.js as shown with path . helpful link -> https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#serving-apps-with-client-side-routing
+
+/*
+
+Your mongodb service is probably down. Run sudo service mongod start to start the daemon process
+
+*/
+
+'$2a$10$iyWgzeBUeMHoO2eKKGIZ2uWkUtZM77dU/ZYYfhYQheWAYqj7gwWDm'

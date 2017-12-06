@@ -36942,13 +36942,13 @@ var _react = __webpack_require__(7);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _validator = __webpack_require__(491);
-
-var _validator2 = _interopRequireDefault(_validator);
-
 var _propTypes = __webpack_require__(13);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _validator = __webpack_require__(491);
+
+var _validator2 = _interopRequireDefault(_validator);
 
 var _LoginForm = __webpack_require__(545);
 
@@ -37002,10 +37002,9 @@ var LoginForm = function (_React$Component) {
 
 		return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
 			data: {
-				email: "",
-				password: ""
+				email: '',
+				password: ''
 			},
-			loading: false,
 			errors: {}
 		}, _this.onChange = function (e) {
 			return _this.setState({ data: _extends({}, _this.state.data, _defineProperty({}, e.target.name, e.target.value))
@@ -37036,7 +37035,7 @@ var LoginForm = function (_React$Component) {
 			    data = _state.data,
 			    errors = _state.errors;
 
-			return _react2.default.createElement('div', null, _react2.default.createElement(_LoginForm.Form, { onSubmit: this.onSubmit }, errors.global && _react2.default.createElement(_InlineError2.default, { text: 'Something went wrong' }), _react2.default.createElement(_LoginForm.Group, null, _react2.default.createElement(_LoginForm.Input, {
+			return _react2.default.createElement('div', null, _react2.default.createElement(_LoginForm.Form, { onSubmit: this.onSubmit }, _react2.default.createElement(_LoginForm.Group, null, _react2.default.createElement(_LoginForm.Input, {
 				type: 'email',
 				id: 'email',
 				name: 'email',

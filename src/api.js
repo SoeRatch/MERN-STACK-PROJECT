@@ -6,3 +6,5 @@ export default {
 									.then(res=>res.data.user)
 	}
 };
+
+

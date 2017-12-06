@@ -13,7 +13,6 @@ class LoginPage extends React.Component{
 					<h1> LoginPage </h1>
 					<LoginForm submit={this.submit} />
 				</div>
-
 			);
 	}
 
@@ -27,3 +26,6 @@ LoginPage.propTypes = {
 };
 
 export default connect(null,{login})(LoginPage);
+
+
+

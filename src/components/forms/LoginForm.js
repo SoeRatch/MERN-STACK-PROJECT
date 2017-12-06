@@ -1,17 +1,15 @@
 import React from 'react';
-import Validator from 'validator';
 import PropTypes from 'prop-types';
+import Validator from 'validator';
 import {Form, Group,  Input} from '../style/LoginForm.style';
 import InlineError from '../messages/InlineError';
-
 
 class LoginForm extends React.Component{
 	state={
 		data:{
-			email:"",
-			password:""
+			email:'',
+			password:''
 		},
-		loading: false,
 		errors:{}
 	}
 
@@ -27,9 +25,9 @@ class LoginForm extends React.Component{
 		this.setState({errors});
 		if(Object.keys(errors).length === 0){
 			this.props.submit(this.state.data)
-				.catch(err=>this.setState({
-					errors: err.response.data.errors
-				}));
+				.catch(err => this.setState({
+				 	errors: err.response.data.errors
+				 }));
 		}
 	};
 
@@ -49,8 +47,8 @@ class LoginForm extends React.Component{
 		return(
 			<div>
 			<Form onSubmit={this.onSubmit}>
-				{errors.global && <InlineError text="Something went wrong" />}
-				<Group >				
+				<Group >
+					
 						<Input 
 							type="email" 
 							id="email"
@@ -58,17 +56,23 @@ class LoginForm extends React.Component{
 							value={data.email}
 							placeholder="email"
 							onChange={this.onChange} />
-					{errors.email && <InlineError text={errors.email} />}							
+					{errors.email && <InlineError text={errors.email} />}	
+						
 				</Group>
-				<Group>				
+
+				<Group>
+					
 						<Input 
 							type="password" 
 							id="password"
 							name="password"
 							value={data.password}
 							placeholder="password"
-							onChange={this.onChange} />						
-				</Group>				
+							onChange={this.onChange} />
+						
+						
+				</Group>
+								
 		 		<Group style={{width:'120px'}}>
 		          		<button>Log In</button>
 		        </Group>

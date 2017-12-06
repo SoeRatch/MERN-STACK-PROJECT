@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server",
-    "start": "npm run webpack; nodemon server",
+    "start": "npm run webpack; node server",
     "webpack": "webpack --config ./webpack.config.js",
     "lint": "eslint src"
   },
@@ -37,9 +37,14 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
