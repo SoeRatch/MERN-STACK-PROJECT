@@ -23,3 +23,9 @@ export const logout = () => dispatch =>{
 	dispatch(userLoggedOut());
 };
 
+export const confirm = (token) => (dispatch) =>
+	api.user.confirm(token).then(user=>{
+		localStorage.PensheelJWT = user.token;
+		dispatch(userLoggedIn(user));
+	});
+

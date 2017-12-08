@@ -1,24 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route} from 'react-router-dom';
-
 import {createStore, applyMiddleware } from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import 'babel-polyfill';
+import decode from 'jwt-decode';
 import rootReducer from './rootReducer';
 import PensheelApp from './PensheelApp';
 import {userLoggedIn} from './actions/auth';
+
 
 const store = createStore(
 	rootReducer,
 	composeWithDevTools(applyMiddleware(thunk))
 );
 
-if(localStorage.bookwormJWT){
+if(localStorage.PensheelJWT){
+	const payload = decode(localStorage.PensheelJWT)
 	const user ={ 
-		token: localStorage.bookwormJWT
+		token: localStorage.PensheelJWT,
+		email: payload.email,
+		confirmed: payload.confirmed
 		};
 	store.dispatch(userLoggedIn(user));
 }

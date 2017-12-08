@@ -22,4 +22,14 @@ Your mongodb service is probably down. Run sudo service mongod start to start th
 
 */
 
-'$2a$10$iyWgzeBUeMHoO2eKKGIZ2uWkUtZM77dU/ZYYfhYQheWAYqj7gwWDm'
+=>nodemailer real emails help -> https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799
+
+
+
+
+=>Uncaught SyntaxError: Unexpected token < and unable to handle routes with params error solved with =>{
+ using 
+	<script src="/app.js"></script>
+	instead of
+	<script src="app.js"></script>
+}

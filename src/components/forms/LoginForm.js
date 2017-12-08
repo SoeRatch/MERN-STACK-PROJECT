@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Validator from 'validator';
+import { Button ,Message} from 'semantic-ui-react';
 import {Form, Group,  Input} from '../style/LoginForm.style';
 import InlineError from '../messages/InlineError';
 
@@ -74,9 +75,16 @@ class LoginForm extends React.Component{
 				</Group>
 								
 		 		<Group style={{width:'120px'}}>
-		          		<button>Log In</button>
+		          <Button inverted color='blue'>Log In</Button>
 		        </Group>
 		     </Form>
+		     { errors.global && (
+					<Message negative>
+						<Message.Header> Something went wrong </Message.Header>
+						<p> { errors.global }</p>
+					</Message>
+
+				)}
 		    </div>
 			);
 	}
