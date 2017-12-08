@@ -33,3 +33,7 @@ Your mongodb service is probably down. Run sudo service mongod start to start th
 	instead of
 	<script src="app.js"></script>
 }
+
+=>https://stackoverflow.com/questions/46384591/node-was-compiled-against-a-different-node-js-version-using-node-module-versio
+
+=>upgrading node - https://stackoverflow.com/questions/42045637/nodemailer-error-cant-fix
