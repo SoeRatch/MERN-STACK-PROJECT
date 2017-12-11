@@ -10,9 +10,11 @@ import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 import ForgotPasswordPage from './components/pages/ForgotPasswordPage';
 import ResetPasswordPage from './components/pages/ResetPasswordPage';
+import Navigation from './components/Navigation/Navigation';
 
 const PensheelApp =({location}) =>(
 	 <div>
+	 	<Navigation />
 	 	<Route location={location} path='/' exact component={HomePage}/>
 	 	<Route location={location} path="/confirmation/:token" exact component={ConfirmationPage} />	 	
 	 	<GuestRoute location={location}  path='/login' exact component={LoginPage}/>

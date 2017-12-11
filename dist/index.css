@@ -1,0 +1,41 @@
+
+.register {
+  transition: all .5s linear;
+}
+
+.formmain{
+
+
+}
+
+input {
+  margin:12px 0;
+  background-color: white;
+  background-image: none;
+  border: 0px dotted rgb(204, 204, 204);
+  border-bottom-width: 2px;
+  border-radius: 0;
+  box-shadow: 0 0 0 transparent inset;
+  color: rgb(204, 204, 204);
+  display: block;
+  font-size: 1.5em;
+  height: 2.0em;
+  line-height: 1.5;
+  padding: 0 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  vertical-align: middle;
+  width: 100%;
+}
+
+button {
+  font-size: 1.5em;
+  height: 2.0em;
+  line-height: 1.5;
+  margin: 12px 0;
+  padding: 0;
+  background-color:#00b3a0;
+  color:#e2e8e7;
+  border:0 none transparent;
+  width:100%;
+  text-align:center;
+}
