@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Message} from 'semantic-ui-react';
+import {Message} from 'semantic-ui-react';
 import isEmail from 'validator/lib/isEmail';
 import InlineError from '../messages/InlineError';
+import s from '../style/LoginForm.css';
 
 class ForgotPasswordForm extends React.Component{
 	state={
 		data:{
 			email:''
 		},
-		loading: false,
 		errors:{}
 	}
 
@@ -25,11 +25,9 @@ class ForgotPasswordForm extends React.Component{
 		const errors = this.validate(this.state.data);
 		this.setState({errors});
 		if(Object.keys(errors).length === 0){
-			this.setState({ loading:true });
 			this.props.submit(this.state.data)
 				.catch(err => this.setState({
-				 	errors: err.response.data.errors,
-				 	loading:false
+				 	errors: err.response.data.errors
 				 }));
 		}
 	};
@@ -42,27 +40,36 @@ class ForgotPasswordForm extends React.Component{
 	}
 
 	render(){
-		const {data,errors,loading} = this.state;
+		const {data,errors} = this.state;
 		return(
-			<Form onSubmit={this.onSubmit} loading={loading}>
-				{!!errors.global && <Message negative> {errors.global} </Message>}
-				<Form.Field errors={!!errors.email}>
-					<label htmlFor="email"> Email </label>
-					<input 
-						type="email" 
-						id="email"
-						name="email"
-						placeholder="example@ex.com"
-						value={data.email}
-						onChange={this.onChange}
-					/>
 
-					{errors.email && <InlineError text={errors.email} />}
-				</Form.Field>
+			
+			<div className={s.loginBox}>
+						
+							<img src="user.png" className={s.user} alt="" />
 
-				<Button primary> Send Email </Button>
-				
-			</Form>
+							<form onSubmit={this.onSubmit}>
+								{!!errors.global && <Message negative> {errors.global} </Message>}
+								<p>Email</p>
+								<input
+									type="email" 
+									id="email"
+									name="email"
+									value={data.email}
+									placeholder="email"
+									onChange={this.onChange}
+								/>
+								{errors.email && <InlineError text={errors.email} />}
+
+								<input
+									type="submit"
+									name=""
+									value="Send Email"
+								/>
+								
+							</form>
+			</div>
+
 			);
 	}
 }

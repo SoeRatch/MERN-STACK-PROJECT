@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
 import isEmail from 'validator/lib/isEmail';
 import InlineError from '../messages/InlineError';
+import s from '../style/LoginForm.css';
 
 class SignupForm extends React.Component{
 	state = {
@@ -42,34 +42,44 @@ class SignupForm extends React.Component{
 	render(){
 		const {data, errors} = this.state;
 		return(
-			<Form onSubmit={this.onSubmit} >
-				<Form.Field >
-					<label htmlFor="email"> Email </label>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						placeholder="email@email.com"
-						value={data.email}
-						onChange={this.onChange}
-					/>
-					{ errors.email && <InlineError text={errors.email}/>}
-				</Form.Field>
+			<div>
+						<div className={s.loginBox}>
+						
+							<img src="user.png" className={s.user} alt="" />
+							
+							<form onSubmit={this.onSubmit}>
+								<p>Email</p>
+								<input
+									type="email" 
+									id="email"
+									name="email"
+									value={data.email}
+									placeholder="email"
+									onChange={this.onChange}
+								/>
+								{errors.email && <InlineError text={errors.email} />}
 
-				<Form.Field >
-					<label htmlFor="password"> password </label>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						value={data.password}
-						onChange={this.onChange}
-					/>
-					{ errors.password && <InlineError text={errors.password}/> }
-				</Form.Field>
+								<p>Password</p>
+								<input
+									type="password" 
+									id="password"
+									name="password"
+									value={data.password}
+									placeholder="password"
+									onChange={this.onChange}
+								/>
+								{errors.password && <InlineError text={errors.password} />}
+								<input
+									type="submit"
+									name=""
+									value="Sign Up"
+								/>
+								
+								
+							</form>
+						</div>
+					</div>
 
-				<Button primary> Sign up </Button>
-			</Form>
 			);
 	}
 }

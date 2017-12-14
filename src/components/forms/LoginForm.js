@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Validator from 'validator';
-import { Button ,Message} from 'semantic-ui-react';
-import {Form, Group,  Input} from '../style/LoginForm.style';
+import {Message} from 'semantic-ui-react';
+import { Motion, spring } from 'react-motion';
 import InlineError from '../messages/InlineError';
+import s from '../style/LoginForm.css';
+import ForgotPasswordPage from '../pages/ForgotPasswordPage';
+import SignupPage from '../pages/SignupPage';
 
 class LoginForm extends React.Component{
 	state={
@@ -11,8 +14,11 @@ class LoginForm extends React.Component{
 			email:'',
 			password:''
 		},
-		errors:{}
+		errors:{},
+		isOpenfp: false,
+		isOpensp: false
 	}
+
 
 	onChange = e => this.setState({data:{
 		...this.state.data,
@@ -32,6 +38,47 @@ class LoginForm extends React.Component{
 		}
 	};
 
+	finalstylefp=()=>{
+		const final = {
+	
+			left: spring(175)
+		};
+		return final;
+	}
+
+	initialstylefp=()=>{
+		const initial = {
+	
+			left: spring(-750)
+		};
+		return initial;
+	}
+
+	changepositionfp = () =>this.setState({
+			...this.state,
+			isOpenfp: !this.state.isOpenfp
+		});
+	finalstylesp=()=>{
+		const final = {
+	
+			right: spring(175)
+		};
+		return final;
+	}
+
+	initialstylesp=()=>{
+		const initial = {
+	
+			right: spring(-750)
+		};
+		return initial;
+	}
+
+	changepositionsp = () =>this.setState({
+			...this.state,
+			isOpensp: !this.state.isOpensp
+		});
+
 	validate = (data) => {
 		const errors={};
 		if(!Validator.isEmail(data.email))
@@ -43,49 +90,103 @@ class LoginForm extends React.Component{
 
 	render(){
 	
-			const {data,errors} = this.state;
+			const {data,errors,isOpenfp, isOpensp} = this.state;
+			const stylefp = isOpenfp ?this.finalstylefp() : this.initialstylefp();
+			const stylesp = isOpensp ?this.finalstylesp() : this.initialstylesp();
 	
 		return(
+
 			<div>
-			<Form onSubmit={this.onSubmit}>
-				<Group >
-					
-						<Input 
-							type="email" 
-							id="email"
-							name="email"
-							value={data.email}
-							placeholder="email"
-							onChange={this.onChange} />
-					{errors.email && <InlineError text={errors.email} />}	
+						<div className={s.loginBox}>
 						
-				</Group>
+							<img src="user.png" className={s.user} alt="" />
+							
+							<form onSubmit={this.onSubmit}>
+								<p>Email</p>
+								<input
+									type="email" 
+									id="email"
+									name="email"
+									value={data.email}
+									placeholder="email"
+									onChange={this.onChange}
+								/>
+								{errors.email && <InlineError text={errors.email} />}
 
-				<Group>
-					
-						<Input 
-							type="password" 
-							id="password"
-							name="password"
-							value={data.password}
-							placeholder="password"
-							onChange={this.onChange} />
-						
-						
-				</Group>
+								<p>Password</p>
+								<input
+									type="password" 
+									id="password"
+									name="password"
+									value={data.password}
+									placeholder="password"
+									onChange={this.onChange}
+								/>
+								{errors.password && <InlineError text={errors.password} />}
+								<input
+									type="submit"
+									name=""
+									value="Sign In"
+								/>
+								<div onClick={this.changepositionfp} role="presentation" style={{cursor:"pointer"}}> 
+									<p>Forgot Password?</p>
+           						</div>
+           						<div onClick={this.changepositionsp} role="presentation" style={{cursor:"pointer"}}> 
+									<p>Sign up</p>
+           						</div>
 								
-		 		<Group style={{width:'120px'}}>
-		          <Button inverted color='blue'>Log In</Button>
-		        </Group>
-		     </Form>
-		     { errors.global && (
-					<Message negative>
-						<Message.Header> Something went wrong </Message.Header>
-						<p> { errors.global }</p>
-					</Message>
+							</form>
+							
+							{	
+							<Motion style={stylefp}>
+										{
+											({left}) =>
+										   <div
+										   		style={{
+										   				left,
+										   				top:'210px',
+										   				position:'absolute'
+										   		}}>
+										   		<ForgotPasswordPage/>
+										   	</div>                                      
 
-				)}
-		    </div>
+										}
+							</Motion>		
+							
+							}
+
+							{	
+							<Motion style={stylesp}>
+										{
+											({right}) =>
+										   <div
+										   		style={{
+										   				right,
+										   				top:'210px',
+										   				position:'absolute'
+										   		}}>
+										   		<SignupPage/>
+										   	</div>                                      
+
+										}
+							</Motion>		
+							
+							}
+
+
+
+
+
+							{ errors.global && (
+								<Message negative>
+									<Message.Header> Something went wrong </Message.Header>
+									<p> { errors.global }</p>
+								</Message>
+
+							)}
+						</div>
+			</div>
+
 			);
 	}
 }
