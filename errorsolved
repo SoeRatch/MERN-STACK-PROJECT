@@ -38,6 +38,10 @@ Your mongodb service is probably down. Run sudo service mongod start to start th
 
 =>upgrading node - https://stackoverflow.com/questions/42045637/nodemailer-error-cant-fix
 
+=> error on props.history.push solved by using withRouter . error was going to / instead of /dashboard rvrntho this.props.history.push('/dashboard') was used . 
+https://stackoverflow.com/questions/46415297/pass-history-as-props-to-an-event-handler
+
+
 
 
 

@@ -2,11 +2,11 @@ import React from 'react';
 import { Motion, spring } from 'react-motion';
 import { connect } from 'react-redux';
 import PropTypes from "prop-types";
-import GuestRoute from '../../routes/GuestRoute';
+import {Link} from 'react-router-dom';
 import * as actions from '../../../actions/auth';
 import LoginPage from '../../pages/LoginPage';
-import ForgotPasswordPage from '../../pages/ForgotPasswordPage';
 import s from './Iconn.css';
+import flex from '../../style/Flex.css'
 
 
 class Iconn extends React.Component{
@@ -42,14 +42,19 @@ class Iconn extends React.Component{
 	}
 
 	render() {
-			const {isAuthenticated, logout, location} = this.props;
+			const {isAuthenticated, logout} = this.props;
 		const {isOpen} = this.state;
 		const style = isOpen ?this.finalstyle() : this.initialstyle();
 		return(
 											
 					<div>
 						{ 
-							isAuthenticated? <button onClick={()=>logout()}>Logout</button>
+							isAuthenticated? <div className={flex.flexRowContainer}>
+								<Link to='/pensheels/new'>  add </Link>
+								<Link to = '/' >Home</Link>
+								<Link to = '/dashboard' >dashboard</Link>
+							<button onClick={()=>logout()}>Logout</button>
+							</div>
 			             : <div onClick={this.changeposition} role="presentation"> 
 							
 								<img src="user.png" className={s.userbtn} alt="" />
@@ -70,31 +75,14 @@ class Iconn extends React.Component{
 										   				left:'50%',
 										   				position:'absolute'
 										   		}}>
-										   		<GuestRoute location={location}  path='/' exact component={() => (<LoginPage close={this.close} />)}/>
+										   		<LoginPage close={this.close} />
 										   			</div>                                      
 
 										}
 							</Motion>		
 							
 					}
-					{	
-							<Motion style={style}>
-										{
-											({top}) =>
-										   <div
-										   		style={{
-										   				top,
-										   				left:'50%',
-										   				position:'absolute'
-										   		}}>
-										   		<GuestRoute location={location}  path='/forgot_password' exact component={ForgotPasswordPage}/>
-										   	</div>                                      
-
-										}
-							</Motion>		
-							
-					}
-
+					
 
 					</div>
 				
@@ -112,10 +100,7 @@ function mapStateToProps(state){
 
 Iconn.propTypes = {
 	isAuthenticated: PropTypes.bool.isRequired,
-	logout:PropTypes.func.isRequired,
-	location: PropTypes.shape({
-		pathname:PropTypes.string.isRequired
-		}).isRequired
+	logout:PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps,{logout:actions.logout})(Iconn);

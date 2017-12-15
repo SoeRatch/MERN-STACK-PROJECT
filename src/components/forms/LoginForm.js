@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Validator from 'validator';
 import {Message} from 'semantic-ui-react';
 import { Motion, spring } from 'react-motion';
+import {withRouter} from 'react-router-dom';
 import InlineError from '../messages/InlineError';
 import s from '../style/LoginForm.css';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
@@ -37,6 +38,18 @@ class LoginForm extends React.Component{
 				 }));
 		}
 	};
+
+	closefp = data => this.setState({
+			...this.state,
+			isOpenfp: data
+		});
+	closesp = data => {
+		this.setState({
+			...this.state,
+			isOpensp: data
+		});
+		this.props.close(false);
+	}
 
 	finalstylefp=()=>{
 		const final = {
@@ -147,7 +160,7 @@ class LoginForm extends React.Component{
 										   				top:'210px',
 										   				position:'absolute'
 										   		}}>
-										   		<ForgotPasswordPage/>
+										   		<ForgotPasswordPage closefp={this.closefp}/>
 										   	</div>                                      
 
 										}
@@ -165,7 +178,7 @@ class LoginForm extends React.Component{
 										   				top:'210px',
 										   				position:'absolute'
 										   		}}>
-										   		<SignupPage/>
+										   		<SignupPage closesp={this.closesp}/>
 										   	</div>                                      
 
 										}
@@ -192,7 +205,8 @@ class LoginForm extends React.Component{
 }
 
 LoginForm.propTypes = {
-	submit: PropTypes.func.isRequired
+	submit: PropTypes.func.isRequired,
+	close:PropTypes.func.isRequired
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

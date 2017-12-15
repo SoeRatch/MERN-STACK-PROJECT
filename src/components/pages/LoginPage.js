@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {withRouter} from 'react-router-dom';
 import { login } from '../../actions/auth';
 import LoginForm from '../forms/LoginForm';
 
@@ -16,7 +17,7 @@ class LoginPage extends React.Component{
 		return(
 				<div>
 					<div>
-					<LoginForm submit={this.submit} />
+					<LoginForm close={this.props.close} submit={this.submit} />
 					</div>
 					
 				</div>
@@ -33,7 +34,7 @@ LoginPage.propTypes = {
 	close:PropTypes.func.isRequired
 };
 
-export default connect(null,{login})(LoginPage);
+export default withRouter(connect(null,{login})(LoginPage));
 
 
 

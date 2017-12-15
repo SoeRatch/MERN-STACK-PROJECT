@@ -11,7 +11,12 @@ class ForgotPasswordPage extends React.Component{
 		success: false
 	};
 
-	submit =data => this.props.resetPasswordRequest(data).then(()=>this.setState({success:true}));
+	submit =data => this.props.resetPasswordRequest(data).then(()=>{
+		this.props.closefp(false);
+		this.setState({success:true})
+	});
+	
+
 
 	render(){
 		return(
@@ -28,7 +33,8 @@ class ForgotPasswordPage extends React.Component{
 }
 
 ForgotPasswordPage.propTypes = {
-	resetPasswordRequest: PropTypes.func.isRequired
+	resetPasswordRequest: PropTypes.func.isRequired,
+	closefp:PropTypes.func.isRequired
 }
 
 export default connect(null,{resetPasswordRequest})(ForgotPasswordPage);

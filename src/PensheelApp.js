@@ -7,19 +7,21 @@ import ConfirmationPage from './components/pages/ConfirmationPage';
 import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 import ResetPasswordPage from './components/pages/ResetPasswordPage';
-import Navigation from './components/Navigation/Navigation';
 import Bar from './PensheelApp.style';
+import NewPensheelPage from './components/pages/NewPensheelPage';
+import Navigation from './components/Navigation/Navigation';
 
 const PensheelApp =({location}) =>(
 	 <div>
-	 	<Navigation/> 	
-		 	<div style={{position:'fixed'}}>
-		 		<Bar />
-		 	</div>
-	 	<Route location={location} path='/' exact component={HomePage}/>
+		<Navigation />	
+		 <div style={{position:'fixed'}}>
+		 	<Bar />
+		 </div>
+	 	<GuestRoute location={location} path='/' exact component={HomePage}/>
 	 	<Route location={location} path="/confirmation/:token" exact component={ConfirmationPage} />	 	
-	 	<GuestRoute location={location}  path='/reset_password/:token' exact component={ResetPasswordPage}/>
-	 	<UserRoute location={location}  path='/dashboard' exact component={DashboardPage}/>
+	 	<GuestRoute location={location} path='/reset_password/:token' exact component={ResetPasswordPage}/>
+	 	<UserRoute location={location} path='/dashboard' exact component={DashboardPage}/>
+	 	<UserRoute location={location} path="/pensheels/new" exact component={NewPensheelPage} /> 	
 	 </div>
 	 );
 	 

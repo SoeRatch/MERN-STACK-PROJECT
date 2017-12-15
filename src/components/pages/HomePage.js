@@ -7,11 +7,8 @@ const HomePage = ({isAuthenticated, logout}) => (
 	<div >
 		<h1> HomePage </h1>
 		{ isAuthenticated? <button onClick={()=>logout()}>Logout</button>
-			             : <div>.</div> }
-	
-	
-		
-
+			             : <div>... </div>
+	    }			
 	</div>
 );
 
