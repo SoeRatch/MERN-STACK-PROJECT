@@ -14,6 +14,12 @@ export default {
 
 		resetPassword: data => axios.post('/api/auth/reset_password',{data})
 
+	},
+
+	articles:{
+		create: article =>
+			axios.post("/api/articles", {article}).then(
+				res => res.data.article)		
 	}
 };
 

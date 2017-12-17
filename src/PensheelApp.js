@@ -8,7 +8,7 @@ import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 import ResetPasswordPage from './components/pages/ResetPasswordPage';
 import Bar from './PensheelApp.style';
-import NewPensheelPage from './components/pages/NewPensheelPage';
+import NewArticlePage from './components/pages/NewArticlePage';
 import Navigation from './components/Navigation/Navigation';
 
 const PensheelApp =({location}) =>(
@@ -21,7 +21,7 @@ const PensheelApp =({location}) =>(
 	 	<Route location={location} path="/confirmation/:token" exact component={ConfirmationPage} />	 	
 	 	<GuestRoute location={location} path='/reset_password/:token' exact component={ResetPasswordPage}/>
 	 	<UserRoute location={location} path='/dashboard' exact component={DashboardPage}/>
-	 	<UserRoute location={location} path="/pensheels/new" exact component={NewPensheelPage} /> 	
+	 	<UserRoute location={location} path="/articles/new" exact component={NewArticlePage} /> 	
 	 </div>
 	 );
 	 

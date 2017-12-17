@@ -8,7 +8,6 @@ import LoginPage from '../../pages/LoginPage';
 import s from './Iconn.css';
 import flex from '../../style/Flex.css'
 
-
 class Iconn extends React.Component{
 
 	state={
@@ -50,10 +49,10 @@ class Iconn extends React.Component{
 					<div>
 						{ 
 							isAuthenticated? <div className={flex.flexRowContainer}>
-								<Link to='/pensheels/new'>  add </Link>
-								<Link to = '/' >Home</Link>
-								<Link to = '/dashboard' >dashboard</Link>
-							<button onClick={()=>logout()}>Logout</button>
+								<Link to='/articles/new'><button className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Write</span></button></Link>
+								<Link to = '/' ><button className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Home</span></button></Link>
+								<Link to = '/dashboard' ><button className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Dashboard</span></button></Link>
+								<button onClick={()=>logout()} className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Logout</span></button>
 							</div>
 			             : <div onClick={this.changeposition} role="presentation"> 
 							

@@ -1,0 +1,17 @@
+.editor {
+  width: 600px;
+ 
+}
+
+.root {
+  width: 900px;
+  fontFamily: 'Georgia', 'serif';
+  fontSize: 14px;
+  padding: 20px;
+  width: 600px;
+  
+}
+
+.editor a {
+    color: #08c;
+}

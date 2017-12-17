@@ -10,6 +10,7 @@ import decode from 'jwt-decode';
 import rootReducer from './rootReducer';
 import PensheelApp from './PensheelApp';
 import {userLoggedIn} from './actions/auth';
+import setAuthorizationHeader from './utils/setAuthorizationHeader';
 
 
 const store = createStore(
@@ -24,6 +25,7 @@ if(localStorage.PensheelJWT){
 		email: payload.email,
 		confirmed: payload.confirmed
 		};
+	setAuthorizationHeader(localStorage.PensheelJWT);
 	store.dispatch(userLoggedIn(user));
 }
 
