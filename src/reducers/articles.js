@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
-import { ARTICLE_CREATED} from '../types';
+import { ARTICLES_FETCHED, ARTICLE_CREATED} from '../types';
 
 export default function articles(state={}, action={}){
 	switch(action.type){
+		case ARTICLES_FETCHED:
 		case ARTICLE_CREATED:
 			return {...state, ...action.data.entities.articles};
 		default: return state;

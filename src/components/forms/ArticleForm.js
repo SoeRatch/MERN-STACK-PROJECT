@@ -1,17 +1,17 @@
 import React from 'react';
-import {  EditorState , convertToRaw } from 'draft-js';
+import {  EditorState , convertToRaw, RichUtils} from 'draft-js';
 import PropTypes from 'prop-types';
 import Editor from 'draft-js-plugins-editor';
-import {Message,Input, Button } from 'semantic-ui-react';
+import {Message, Button} from 'semantic-ui-react';
 import 'draft-js/dist/Draft.css';
-import './ArticleForm.css';
+import s from '../style/ArticleForm.css';
 import basicTextStylePlugin from '../../plugins/basicTextStylePlugin';
+import addLinkPlugin from '../../plugins/addLinkPlugin';
 
 class ArticleForm extends React.Component{
     state={
             data:{
-                    title:'',
-                    type:''
+                    title:''
                   },
             editorState: EditorState.createEmpty(),
             errors:{}
@@ -19,11 +19,12 @@ class ArticleForm extends React.Component{
     }
 
    
+
     componentDidMount() {
     this.focus();
   }
 
-   
+  
 
   onChange = (editorState) => {
      if (editorState.getDecorator() !== null) {
@@ -49,19 +50,34 @@ class ArticleForm extends React.Component{
               const contentState = dat.getCurrentContent();
               const rawJson = convertToRaw(contentState);              
               const jsonStr = JSON.stringify(rawJson);              
-              this.props.submit({articlestring:jsonStr,title:this.state.data.title,type:this.state.data.type})
+              this.props.submit({articlestring:jsonStr,title:this.state.data.title})
                 .catch(err => this.setState(errors: err.response.data.errors)
       );
     }
   };
 
-   plugins = [
-      basicTextStylePlugin
-    ]
+
+      onToggleBlock = (e)=> {
+      e.preventDefault();
+      this.toggleBlockType(e.target.value);
+    }
+
+     onToggleInline = (e)=> {
+      e.preventDefault();
+      this.toggleInlineStyle(e.target.value);
+    }
+
+
+     plugins = [
+          addLinkPlugin,
+          basicTextStylePlugin
+        ]   
 
     focus = () => {
-    this.editor.focus();
-  }
+        this.editor.focus();
+      }
+
+
 
     validate = (meta) => {
         const errors={};
@@ -75,14 +91,65 @@ class ArticleForm extends React.Component{
       }
 
 
+       makeLink(){
+        // eslint-disable-next-line no-alert
+        const  link = window.prompt('Paste the link -');
+        const  editorState  = this.state.editorState;
+        const selection = editorState.getSelection();
+        if (selection.isCollapsed()) {
+            return;
+          }
+        if (!link) {
+              this.onChange(RichUtils.toggleLink(
+                editorState, selection, null));
+              return ;
+            }
+
+        const content = editorState.getCurrentContent();
+        const contentWithEntity = content.createEntity('LINK', 'IMMUTABLE', { url: link });
+        const entityKey = contentWithEntity.getLastCreatedEntityKey();
+        const newEditorState = EditorState.set(editorState, { currentContent: contentWithEntity });
+        this.setState({
+            editorState: RichUtils.toggleLink(
+              newEditorState,
+              newEditorState.getSelection(),
+              entityKey
+            )});
+                  
+      }
+
+
+
+      toggleBlockType(blockType){
+        this.onChange(
+          RichUtils.toggleBlockType(
+            this.state.editorState,
+            blockType
+            )
+          );
+      }
+
+       toggleInlineStyle(inlineStyle){
+        this.onChange(
+          RichUtils.toggleInlineStyle(
+            this.state.editorState,
+            inlineStyle
+            )
+          );
+      }
    
+
+
     render() {
         
         const errors= this.state.errors;
         const data = this.state.data;
+
         return (
-            <div>
-                    <Input 
+            <div className={[s.bor].join(' ')}>
+                  <div className={s.inputs}>
+                    <input 
+                        className={s.inputed}
                         type="text" 
                         id="title"
                         name="title"
@@ -90,19 +157,24 @@ class ArticleForm extends React.Component{
                         placeholder="Title"
                         onChange={this.ondataChange} 
                       />
+                    <div className={s.borderline} />
+                  </div>
 
-                    <Input 
-                        type="text" 
-                        id="type"
-                        name="type"
-                        value={data.type}
-                        placeholder="type-optional"
-                        onChange={this.ondataChange} 
-                      />
+                    <div className="ui icon buttons">
+                        <button className="ui button" onMouseDown = {this.onToggleInline} value='BOLD'><span><i className="bold icon"/></span></button>
+                        <button className="ui button" onMouseDown = {this.onToggleInline} value='UNDERLINE'><i className="underline icon" /></button>
+                        <button className="ui button" onMouseDown = {this.onToggleInline} value='ITALIC'><i className="italic icon" /></button>
+                        <button className="ui button" onMouseDown = {this.onToggleBlock} value='ordered-list-item'><i className="ordered list icon" /></button>
+                      <button className="ui button" onMouseDown = {this.onToggleBlock} value='unordered-list-item'><i className="unordered list icon" /></button>
+                      <button className="ui button" onMouseDown = {this.onToggleBlock} value='header-one'><i className="header icon" /></button>
+                      <button className="ui button" onClick={()=>{this.makeLink();}}><i className="linkify icon" /></button>
+                     
+                      </div>
 
-                    <div className="root">
+
+                    <div className={s.root}>
                    
-                        <div className="editor" onClick={this.focus} role="presentation">
+                        <div className={s.editor} onClick={this.focus} role="presentation">
                             <Editor
                                 editorState={this.state.editorState}
                                 plugins={this.plugins}
@@ -112,6 +184,7 @@ class ArticleForm extends React.Component{
                                 spellCheck
                              />
                         </div>
+         
                     </div>
                         
                     <Button onClick={this.onSubmit}> submit draft </Button>
@@ -128,11 +201,6 @@ class ArticleForm extends React.Component{
         );
     }
 } 
-
-
-
-
-
 
 ArticleForm.propTypes ={
     submit: PropTypes.func.isRequired

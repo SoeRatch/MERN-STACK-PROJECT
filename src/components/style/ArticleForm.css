@@ -1,0 +1,49 @@
+
+
+.editor {
+    height: 50vh;
+    overflow-y: scroll;
+ 
+}
+.editor a {
+    color: #08c;
+}
+
+
+
+.bor{
+	border-top: 0;
+	border-bottom: 0;
+	width:70%;
+  padding:20px;
+	box-shadow:
+  0 1px 1px rgba(0,0,0,0.15),
+  0 10px 0 -5px #999,
+  0 10px 1px -4px rgba(0,0,0,0.15),
+  0 20px 0 -10px #ccc,
+  0 20px 1px -9px rgba(0,0,0,0.15),0 0 40px rgba(0, 0, 0, 0.1) inset
+}
+
+.inputs{
+	width:600px;
+  height:auto;
+  margin-left:30%;
+  
+}
+
+.inputed{
+  width:100%;
+  text-transform:uppercase;
+  color:#555555;
+  border:none;
+  outline:none;
+  background:none;
+  padding:6px 3px;
+}
+
+.borderline{
+  width:100%;
+  border:1px solid #555555;
+  height:18%;
+  box-shadow:0px 2px 3px 0px rgba(0,0,0,.25);
+}

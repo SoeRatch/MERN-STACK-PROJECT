@@ -41,6 +41,9 @@ Your mongodb service is probably down. Run sudo service mongod start to start th
 => error on props.history.push solved by using withRouter . error was going to / instead of /dashboard rvrntho this.props.history.push('/dashboard') was used . 
 https://stackoverflow.com/questions/46415297/pass-history-as-props-to-an-event-handler
 
+=> eslint error of ->PropType is defined but prop is never used  react/no-unused-prop-types -> solved by adding -> "react/no-unused-prop-types": [<enabled>, { customValidators: <customValidator>, skipShapeProps: <skipShapeProps> }] ->in eslint rule 
+
+
 
 
 

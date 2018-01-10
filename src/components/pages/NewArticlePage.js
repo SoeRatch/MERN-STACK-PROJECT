@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ArticleForm from '../forms/ArticleForm';
-import  createArticle  from '../../actions/articles';
+import  { createArticle } from '../../actions/articles';
+import flex from '../style/Flex.css';
+import s from '../style/NewArticle.css';
 
 class NewArticlePage extends React.Component{
 
@@ -10,7 +12,7 @@ submit = data =>this.props.createArticle(data).then(()=>this.props.history.push(
 	
 	render(){
 		return(
-			<div>
+			<div className={[flex.flexRowCenter, s.divved].join(' ')} >
 				<ArticleForm submit = {this.submit}/>
 				 
 			</div>

@@ -7,6 +7,12 @@ const router = express.Router();
 
 router.use(authenticate);
 
+router.get('/',(req,res)=>{
+	Article.find({ userId: req.currentUser._id})
+		.then(articles=>res.json({articles}));
+});
+
+
 router.post('/',(req,res)=>{
 	Article.create({ ...req.body.article, userId: req.currentUser._id })
 		.then(article => res.json({ article }))
@@ -20,3 +26,4 @@ router.post('/',(req,res)=>{
 
 
 export default router;
+

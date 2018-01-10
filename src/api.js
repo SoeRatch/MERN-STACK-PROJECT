@@ -17,6 +17,9 @@ export default {
 	},
 
 	articles:{
+		fetchAll: () => axios.get('/api/articles').then(
+			res => res.data.articles),
+
 		create: article =>
 			axios.post("/api/articles", {article}).then(
 				res => res.data.article)		
