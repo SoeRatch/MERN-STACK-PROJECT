@@ -8,6 +8,14 @@ import s from '../style/ArticleForm.css';
 import basicTextStylePlugin from '../../plugins/basicTextStylePlugin';
 import addLinkPlugin from '../../plugins/addLinkPlugin';
 
+function myBlockStyleFn(contentBlock) {
+  const type = contentBlock.getType();
+  if (type === 'blockquote') {
+    return 'superFancyBlockquote';
+  }
+  return 'superFancyBlockquote';
+}
+
 class ArticleForm extends React.Component{
     state={
             data:{
@@ -167,6 +175,7 @@ class ArticleForm extends React.Component{
                         <button className="ui button" onMouseDown = {this.onToggleBlock} value='ordered-list-item'><i className="ordered list icon" /></button>
                       <button className="ui button" onMouseDown = {this.onToggleBlock} value='unordered-list-item'><i className="unordered list icon" /></button>
                       <button className="ui button" onMouseDown = {this.onToggleBlock} value='header-one'><i className="header icon" /></button>
+                      <button className="ui button" onMouseDown = {this.onToggleBlock} value='blockquote'>blockquote</button>                      
                       <button className="ui button" onClick={()=>{this.makeLink();}}><i className="linkify icon" /></button>
                      
                       </div>
@@ -176,6 +185,7 @@ class ArticleForm extends React.Component{
                    
                         <div className={s.editor} onClick={this.focus} role="presentation">
                             <Editor
+                                blockStyleFn={myBlockStyleFn}
                                 editorState={this.state.editorState}
                                 plugins={this.plugins}
                                 onChange={this.onChange}

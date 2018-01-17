@@ -43,7 +43,7 @@ button {
     z-index .3s step-end,
     transform .3s,
     -webkit-transform .3s;
-  z-index: 1;
+  
   cursor: pointer;
 }
 

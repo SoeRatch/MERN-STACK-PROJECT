@@ -1,23 +1,31 @@
 import { normalize } from 'normalizr';
-import articleSchema  from '../schemas';
-import { ARTICLES_FETCHED, ARTICLE_CREATED } from '../types';
+import {articleSchema, artSchema} from '../schemas';
+import { ARTICLE_CREATED,TITLES_FETCHED, SINGLE_ARTICLE_FETCHED } from '../types';
 import api from '../api';
 
-const articlesFetched = (data) =>({
-	type: ARTICLES_FETCHED,
-	data
+const titlesFetched = (titles) =>({
+	type: TITLES_FETCHED,
+	titles
 });
+
+const singlearticleFetched = ( article ) => ({
+	type: SINGLE_ARTICLE_FETCHED,
+	article
+});
+
 
 const articleCreated = data =>({
 	type: ARTICLE_CREATED,
 	data
 });
 
+export const fetchtitles = () => (dispatch) =>
+	api.articles.fetchAlltitle().then(titles=>
+		dispatch(titlesFetched(titles)));
 
-export const fetchArticles = () => (dispatch) =>
-	api.articles.fetchAll().then(articles=>
-		dispatch(articlesFetched(normalize(articles,[articleSchema]))));
-
+export const fetchsingleArticle = (paramt) => (dispatch) =>
+	api.articles.fetchsingleArticle(paramt).then(article=>
+		dispatch(singlearticleFetched(normalize(article,artSchema))));
 
  export const createArticle = data => (dispatch) =>
 	api.articles.create(data).then(article =>

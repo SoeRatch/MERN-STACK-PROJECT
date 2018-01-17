@@ -1,9 +1,13 @@
 import { schema } from 'normalizr';
 
- const articleSchema = new schema.Entity(
+ export const articleSchema = new schema.Entity(
 	"articles",
 	{},
 	{ idAttribute: "_id"}
 );
 
-export default articleSchema;
+export const artSchema = new schema.Entity(
+	"article",
+	{},
+	{ idAttribute: "_id"}
+);

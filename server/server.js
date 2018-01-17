@@ -30,6 +30,6 @@ app.get('/*', function (req, res) {
  });
 
 app.server.listen(process.env.PORT || 3000);
-console.log(`Started on port ${app.server.address().port}`);
+console.log(`Started on port ${process.env.PORT}`);
 
 export default app;

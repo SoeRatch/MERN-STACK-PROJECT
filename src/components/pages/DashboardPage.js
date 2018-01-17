@@ -1,98 +1,75 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import { Editor, EditorState , convertFromRaw ,CompositeDecorator} from 'draft-js';
+import {Link} from 'react-router-dom';
 import _ from 'lodash';
 import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
-import { allArticlesSelector } from '../../reducers/articles';
-import AddArticleCtA from '../ctas/AddArticleCtA';
-import { fetchArticles } from '../../actions/articles';
-
-function findLinkEntities(contentBlock, callback, contentState) {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        contentState.getEntity(entityKey).getType() === 'LINK'
-      );
-    },
-    callback
-  );
-}
-
-const Link = (props) => {
-  const {url} = props.contentState.getEntity(props.entityKey).getData();
-  return (
-    <a href={url}>
-      {props.children}
-    </a>
-  );
-};
+import { fetchtitles } from '../../actions/articles';
+import s from '../style/DashboardPage.css';
 
 
 class DashboardPage extends React.Component{
-	
-	componentDidMount = () => {
-		this.onInit(this.props);
-	}
+  
+  componentDidMount = () => {
+    this.onInit(this.props);
+  }
 
-	onInit = (props) =>{
-	 props.fetchArticles();
-	}
+  onInit = (props) =>{
+   props.fetchtitles();
+  }
 
-	render(){
-		 const decorator = new CompositeDecorator([
-      {
-        strategy: findLinkEntities,
-        component: Link,
-      },
-    ]);
-    
-		const {isConfirmed, articles} = this.props;
-		return(
-			<div>
-				{ !isConfirmed && <ConfirmEmailMessage />}
+  render(){
+     
+    const {isConfirmed, titles} = this.props;
+    return(
 
-				{articles.length === 0 && <AddArticleCtA /> }
-		
-				{_.map(articles, article => {
-                    const nn = article.articlestring;
-                    const editorState = EditorState.createWithContent(convertFromRaw(JSON.parse(nn)), decorator);
+        <div className={s.pfcontainer}>
+            { !isConfirmed && <ConfirmEmailMessage />}
+            <div className={s.pfcontent}>
+              
+                <div className={s.pfgrid}>
 
-             return (
-                       <div>  
 
-                          <div><pre>
-                          	<Editor 
-	                           editorState={editorState}
-	                            readOnly 
-                            	/>
-                            </pre></div>
-                       </div>
-                   )}
+                  {_.map(titles, title => {
+                              const mn = title.title;
+                             return (
+                                    <div>
+                                      <Link to={`/article/${mn}`}>
+                                        <div className={s.pfgriditem}>
+                                          <section className={[s.col, s.left].join(' ')}>
+                                              <h3>{mn}</h3>
+                                              <p>This content is real. These section hover properties are REAL.</p>
+                                              <div className={s.magic}><h4>{mn}</h4></div>
+                                          </section>
+                                        </div>
+                                      </Link>  
+                                    </div>
+                      )}
                   )}
-			</div>
 
-			);
+                </div>
+              </div>
+    
+          
+        </div>
 
-	}
+      );
+  }
 
 }
 
 
 DashboardPage.propTypes={
-	isConfirmed:PropTypes.bool.isRequired,
-	fetchArticles: PropTypes.func.isRequired,
-	articles:PropTypes.arrayOf(PropTypes.string.isRequired).isRequired
+   fetchtitles: PropTypes.func.isRequired,
+   titles: PropTypes.string.isRequired,
+   isConfirmed:PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state){
-	return{
-		isConfirmed: !!state.user.confirmed,
-		articles: allArticlesSelector(state)
-	};
+  return{
+    isConfirmed: !!state.user.confirmed,
+    titles:state.titles
+  };
 }
 
-export default connect(mapStateToProps,{fetchArticles})(DashboardPage);
+export default connect(mapStateToProps, {fetchtitles})(DashboardPage);

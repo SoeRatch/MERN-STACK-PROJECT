@@ -1,20 +1,36 @@
 import { createSelector } from 'reselect';
-import { ARTICLES_FETCHED, ARTICLE_CREATED} from '../types';
+import { ARTICLE_CREATED, TITLES_FETCHED, SINGLE_ARTICLE_FETCHED} from '../types';
 
-export default function articles(state={}, action={}){
+export const articles=function(state={}, action={}){
 	switch(action.type){
-		case ARTICLES_FETCHED:
 		case ARTICLE_CREATED:
 			return {...state, ...action.data.entities.articles};
 		default: return state;
 	}
 }
 
+export const titles= function(state={}, action={}){
+	switch(action.type){
+		
+		case TITLES_FETCHED:
+			return { ...state, ...action.titles}
+		default: return state;
+	}
+}
+
+export const article= function(state={}, action={}){
+	switch(action.type){
+		case SINGLE_ARTICLE_FETCHED:
+		    return {  ...action.article.entities.article};
+		default: return state;
+	}
+}
+
 // SELECTORS
 
-export const articlesSelector = state => state.articles;
+export const artSelector = state => state.article;
 
-export const allArticlesSelector = createSelector(
-	articlesSelector,
-	articlesHash => Object.values(articlesHash)
+export const articleSelector = createSelector(
+	artSelector,
+	articleHash => Object.values(articleHash)
 );

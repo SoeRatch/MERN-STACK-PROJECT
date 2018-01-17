@@ -10,18 +10,23 @@ import ResetPasswordPage from './components/pages/ResetPasswordPage';
 import Bar from './PensheelApp.style';
 import NewArticlePage from './components/pages/NewArticlePage';
 import Navigation from './components/Navigation/Navigation';
+import ArticlePage from './components/pages/ArticlePage';
+import s from './components/style/PensheelApp.css';
 
 const PensheelApp =({location}) =>(
 	 <div>
+	 	<div className={s.zigzag} />
 		<Navigation />	
 		 <div style={{position:'fixed'}}>
-		 	<Bar />
+		 	<Bar className={s.bar}/>
 		 </div>
 	 	<GuestRoute location={location} path='/' exact component={HomePage}/>
 	 	<Route location={location} path="/confirmation/:token" exact component={ConfirmationPage} />	 	
 	 	<GuestRoute location={location} path='/reset_password/:token' exact component={ResetPasswordPage}/>
 	 	<UserRoute location={location} path='/dashboard' exact component={DashboardPage}/>
 	 	<UserRoute location={location} path="/articles/new" exact component={NewArticlePage} /> 	
+	 	<Route location={location} path="/article/:paramt" exact component={ArticlePage} /> 	
+	
 	 </div>
 	 );
 	 
