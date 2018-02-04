@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import SignupForm from '../forms/SignupForm';
-import  signup  from '../../actions/users';
+import  {signup} from '../../actions/users';
 
 class SignupPage extends React.Component{
 	submit = data => this.props.signup(data).then(()=>{
@@ -11,10 +11,14 @@ class SignupPage extends React.Component{
 		this.props.history.push("/dashboard");
 	});
 
+	simplyclose =() => {
+		this.props.closesp(false);
+	};
+
 	render(){
 		return(
 			<div>
-				<SignupForm submit={this.submit} />
+				<SignupForm submit={this.submit} simplyclose={this.simplyclose}/>
 			</div>
 			);
 	}

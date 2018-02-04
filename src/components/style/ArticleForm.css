@@ -26,25 +26,27 @@
 }
 
 .inputs{
-	width:600px;
+width: auto;
   height:auto;
-  margin-left:30%;
-  
+}
+h5.newspaper {
+font-family: Georgia, "Times New Roman", Times, serif;
+letter-spacing: .10em;
+font-size: 20px;
+font-weight: 50;
+border-bottom: groove 2px #CCCCCC;
+
+
+  height:auto;
 }
 
 .inputed{
-  width:100%;
-  text-transform:uppercase;
-  color:#555555;
+  width:60vw;
+  height:auto;
   border:none;
   outline:none;
   background:none;
   padding:6px 3px;
 }
 
-.borderline{
-  width:100%;
-  border:1px solid #555555;
-  height:18%;
-  box-shadow:0px 2px 3px 0px rgba(0,0,0,.25);
-}
+

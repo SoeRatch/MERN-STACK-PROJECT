@@ -15,17 +15,24 @@ class ForgotPasswordPage extends React.Component{
 		this.props.closefp(false);
 		this.setState({success:true})
 	});
+
+	simplyclose =() => {
+		this.props.closefp(false);
+	};
 	
 
 
 	render(){
 		return(
 			<div>
+
 				{this.state.success?(
 					<Message> Email has been sent . </Message>
 					):(
-					  <ForgotPasswordForm submit={this.submit}/>
+						
+					  <ForgotPasswordForm submit={this.submit} simplyclose={this.simplyclose}/>
 					)}
+
 			</div>
 			);
 	}

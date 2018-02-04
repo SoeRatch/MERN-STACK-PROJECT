@@ -4,11 +4,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import { Editor, EditorState , convertFromRaw,CompositeDecorator } from 'draft-js';
-import { fetchsingleArticle } from '../../actions/articles'
+import { fetchsingleArticle, votekora } from '../../actions/articles'
 import { articleSelector } from '../../reducers/articles';
 import s from '../style/ArticlePage.css';
-
-
 
 function findLinkEntities(contentBlock, callback, contentState) {
   contentBlock.findEntityRanges(
@@ -41,7 +39,9 @@ class ArticlePage extends React.PureComponent{
 	onInitial = (props) =>{
 
 	 props.fetchsingleArticle(this.props.match.params.paramt);
+	 
 	}
+	voting = (cid) => {this.props.votekora({id:cid,vote:'up'});}
 
 	render(){
 
@@ -51,19 +51,28 @@ class ArticlePage extends React.PureComponent{
 		        component: Link,
 		      },
 		    ]);
-	    const { article } = this.props;
-	    
-	   
+	    const { article } = this.props;   
 	   return(
+	   <div>
+	   		
+
 			<div className={s.article}>
-				<h5 className={s.newspaper}><span>{this.props.match.params.paramt}</span> Times</h5>
+				
+				<h5 className={s.newspaper}><span>{this.props.match.params.paramt}</span></h5>
 				{_.map(article, art => {
                     const nn = art.articlestring;
+                    /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+                    const pp = art._id;
+                    const vot=art.votes;
                     const editorState = EditorState.createWithContent(convertFromRaw(JSON.parse(nn)), decorator);
 
                    return (
                        <div>  
-
+                       		<div className={s.likebutton} onClick={this.voting(pp)} role="presentation">
+								  <i className="fa fa-heart" />
+								  <div>{vot}</div>
+							</div>
+							
                           	<Editor 
 	                           editorState={editorState}
 	                            readOnly 
@@ -73,6 +82,7 @@ class ArticlePage extends React.PureComponent{
                    )}
                   )}				
 	    	</div>
+	    </div>
 
 			);
 
@@ -82,6 +92,7 @@ class ArticlePage extends React.PureComponent{
 
 ArticlePage.propTypes={
     fetchsingleArticle: PropTypes.func.isRequired,
+    votekora: PropTypes.func.isRequired,
     match: PropTypes.shape({
 		params:PropTypes.shape({
 			paramt:PropTypes.string.isRequired
@@ -95,4 +106,4 @@ function mapStateToProps(state){
 	};
 }
 
-export default connect(mapStateToProps, {fetchsingleArticle})(ArticlePage);
+export default connect(mapStateToProps, {fetchsingleArticle, votekora})(ArticlePage);

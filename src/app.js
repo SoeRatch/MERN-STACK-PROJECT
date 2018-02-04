@@ -23,6 +23,7 @@ if(localStorage.PensheelJWT){
 	const user ={ 
 		token: localStorage.PensheelJWT,
 		email: payload.email,
+		username: payload.username,
 		confirmed: payload.confirmed
 		};
 	setAuthorizationHeader(localStorage.PensheelJWT);

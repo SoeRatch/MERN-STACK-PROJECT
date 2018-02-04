@@ -5,13 +5,15 @@ import PropTypes from "prop-types";
 import {Link} from 'react-router-dom';
 import * as actions from '../../../actions/auth';
 import LoginPage from '../../pages/LoginPage';
+import SignupPage from '../../pages/SignupPage';
 import s from './Iconn.css';
 import flex from '../../style/Flex.css'
 
 class Iconn extends React.Component{
 
 	state={
-		isOpen: false
+		isOpen: false,
+		isOpensp: false
 	}
 
 	close = data => this.setState({
@@ -19,10 +21,36 @@ class Iconn extends React.Component{
 			isOpen: data
 		});
 
-	changeposition = () =>this.setState({
+	closesp = data => {
+		this.setState({
 			...this.state,
-			isOpen: !this.state.isOpen
+			isOpensp: data
 		});
+	}
+
+	finalstylesp=()=>{
+		const final = {
+	
+			top: spring(350)
+		};
+		return final;
+	}
+
+	initialstylesp=()=>{
+		const initial = {
+	
+			top: spring(-250)
+		};
+		return initial;
+	}
+
+	changepositionsp = () =>this.setState({
+			...this.state,
+			isOpensp: !this.state.isOpensp,
+			isOpen: false
+		});
+
+	
 
 	finalstyle=()=>{
 		const final = {
@@ -40,10 +68,17 @@ class Iconn extends React.Component{
 		return initial;
 	}
 
+	changeposition = () =>this.setState({
+			...this.state,
+			isOpen: !this.state.isOpen,
+			isOpensp: false
+		});
+
 	render() {
 			const {isAuthenticated, logout} = this.props;
-		const {isOpen} = this.state;
+		const {isOpen, isOpensp} = this.state;
 		const style = isOpen ?this.finalstyle() : this.initialstyle();
+		const stylesp = isOpensp ?this.finalstylesp() : this.initialstylesp();
 		return(
 											
 					<div>
@@ -54,12 +89,19 @@ class Iconn extends React.Component{
 								<Link to = '/dashboard' ><button className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Dashboard</span></button></Link>
 								<button onClick={()=>logout()} className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Logout</span></button>
 							</div>
-			             : <div onClick={this.changeposition} role="presentation"> 
+			             : <div className={flex.flexRowContainer}>
+			             		<div onClick={this.changeposition} role="presentation"> 
 							
-								<img src="user.png" className={s.userbtn} alt="" />
-								
+								<button  className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Login</span></button>
+						
+								</div>
+
+								<div onClick={this.changepositionsp} role="presentation"> 
 							
-						</div>
+								<button  className={[s.btn, s.stripedshadow, s.dark].join(' ')}><span>Signup</span></button>
+						
+								</div>
+							</div>
 			              }
 	
 	
@@ -82,6 +124,23 @@ class Iconn extends React.Component{
 							
 					}
 					
+					{	
+							<Motion style={stylesp}>
+										{
+											({top}) =>
+										   <div
+										   		style={{
+										   				top,
+										   				left:'50%',
+										   				position:'absolute'
+										   		}}>
+										   		<SignupPage closesp={this.closesp}/>
+										   	</div>                                      
+
+										}
+							</Motion>		
+							
+							}
 
 					</div>
 				

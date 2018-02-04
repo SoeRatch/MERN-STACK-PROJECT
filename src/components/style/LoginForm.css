@@ -1,5 +1,29 @@
+
+.close{
+	position: absolute;
+	top: 0;
+	right:0;
+
+	border: none;
+	outline:none;
+	height: 40px;
+	width:40px;
+	color: #fff;
+	font-size: 16px;
+	background: #ff267e;
+	cursor:pointer;
+	border-radius: 20px;
+
+	}
+
+.close:hover {
+	background: #efed40;
+	color: #262626;
+
+	}
+
 .loginBox
-{
+{	display: block;
 	position: absolute;
 	top: 50%;
 	left: 50 %;
@@ -10,6 +34,8 @@
 	box-sizing: border-box;
 	background: rgba(0,0,0,.5);
 }
+
+
 
 .user
 {
@@ -39,6 +65,7 @@
 }
 
 .loginBox input[type="email"],
+.loginBox input[type="text"],
 .loginBox input[type="password"]
 {
 	border: none;

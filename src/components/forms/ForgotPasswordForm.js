@@ -32,6 +32,10 @@ class ForgotPasswordForm extends React.Component{
 		}
 	};
 
+	simplyclose=() => {
+		this.props.simplyclose();
+	}
+
 	validate = data => {
 		const errors={};
 		if(!isEmail(data.email))
@@ -45,8 +49,7 @@ class ForgotPasswordForm extends React.Component{
 
 			
 			<div className={s.loginBox}>
-						
-							<img src="user.png" className={s.user} alt="" />
+							<div ><button className={s.close} onClick={this.simplyclose}><i className="fa fa-times" /></button></div>
 
 							<form onSubmit={this.onSubmit}>
 								{!!errors.global && <Message negative> {errors.global} </Message>}
@@ -68,6 +71,8 @@ class ForgotPasswordForm extends React.Component{
 								/>
 								
 							</form>
+
+
 			</div>
 
 			);
@@ -75,7 +80,8 @@ class ForgotPasswordForm extends React.Component{
 }
 
 ForgotPasswordForm.propTypes ={
-	submit: PropTypes.func.isRequired
+	submit: PropTypes.func.isRequired,
+	simplyclose: PropTypes.func.isRequired
 };
 
 export default ForgotPasswordForm;

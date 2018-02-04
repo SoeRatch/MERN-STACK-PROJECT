@@ -11,6 +11,21 @@ const schema = new mongoose.Schema({
 	    index:true,
 		unique:true
 	},
+	username:{
+		type:String,
+	    required:true,
+	    index:true,
+		unique:true
+	},
+	name:{
+		type:String
+	},
+	address:{
+		type:String
+	},
+	description:{
+		type:String
+	},
 	passwordHash: {
 		type: String,
 		required: true
@@ -63,6 +78,7 @@ schema.methods.generateJWT = function generateJWT(){
 	return jwt.sign(
 	{
 		email:this.email,
+		username:this.username,
 		confirmed:this.confirmed
 	},
 		process.env.JWT_SECRET
@@ -72,10 +88,13 @@ schema.methods.generateJWT = function generateJWT(){
 schema.methods.toAuthJSON = function toAuthJSON(){
 	return {
 		email: this.email,
+		username:this.username,
 		confirmed:this.confirmed,
 		token: this.generateJWT()
 	}
 };
+
+
 
 schema.plugin(uniqueValidator,{message:"This email is already taken"});
 

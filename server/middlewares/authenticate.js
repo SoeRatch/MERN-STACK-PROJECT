@@ -7,7 +7,6 @@ export default (req, res, next)=>{
 
 	if(header)
 		token = header.split(' ')[1];
-	console.log(token);
 
 	if(token){
 		jwt.verify(token, process.env.JWT_SECRET,

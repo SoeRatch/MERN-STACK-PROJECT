@@ -8,7 +8,8 @@ class SignupForm extends React.Component{
 	state = {
 		data:{
 			email:'',
-			password:''
+			password:'',
+			username:''
 		},
 		errors:{}
 	};
@@ -30,12 +31,19 @@ class SignupForm extends React.Component{
 		}
 	};
 
+	simplyclose=() => {
+		this.props.simplyclose();
+	}
+
+
 		validate = data => {
 			const errors ={};
 			if(!isEmail(data.email))
 				errors.email = "Invalid email";
 			if(!data.password)
 				errors.password = "Can't be blank";
+			if(!data.username)
+				errors.username = "Can't be blank";
 			return errors;
 		};
 
@@ -44,10 +52,22 @@ class SignupForm extends React.Component{
 		return(
 			<div>
 						<div className={s.loginBox}>
-						
-							<img src="user.png" className={s.user} alt="" />
+
+							<div ><button className={s.close} onClick={this.simplyclose}><i className="fa fa-times" /></button></div>
+
 							
 							<form onSubmit={this.onSubmit}>
+								<p>Username</p>
+								<input
+									type="text" 
+									id="username"
+									name="username"
+									value={data.username}
+									placeholder="username"
+									onChange={this.onChange}
+								/>
+								{errors.username && <InlineError text={errors.username} />}
+
 								<p>Email</p>
 								<input
 									type="email" 
@@ -85,7 +105,8 @@ class SignupForm extends React.Component{
 }
 
 SignupForm.propTypes={
-	submit: PropTypes.func.isRequired
+	submit: PropTypes.func.isRequired,
+	simplyclose: PropTypes.func.isRequired
 };
 
 export default SignupForm;

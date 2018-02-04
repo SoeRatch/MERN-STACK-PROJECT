@@ -156,6 +156,7 @@ class ArticleForm extends React.Component{
         return (
             <div className={[s.bor].join(' ')}>
                   <div className={s.inputs}>
+                    <h5 className={s.newspaper}><span>
                     <input 
                         className={s.inputed}
                         type="text" 
@@ -165,7 +166,8 @@ class ArticleForm extends React.Component{
                         placeholder="Title"
                         onChange={this.ondataChange} 
                       />
-                    <div className={s.borderline} />
+
+                      </span></h5>
                   </div>
 
                     <div className="ui icon buttons">

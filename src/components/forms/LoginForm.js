@@ -7,7 +7,6 @@ import {withRouter} from 'react-router-dom';
 import InlineError from '../messages/InlineError';
 import s from '../style/LoginForm.css';
 import ForgotPasswordPage from '../pages/ForgotPasswordPage';
-import SignupPage from '../pages/SignupPage';
 
 class LoginForm extends React.Component{
 	state={
@@ -16,8 +15,7 @@ class LoginForm extends React.Component{
 			password:''
 		},
 		errors:{},
-		isOpenfp: false,
-		isOpensp: false
+		isOpenfp: false
 	}
 
 
@@ -39,17 +37,16 @@ class LoginForm extends React.Component{
 		}
 	};
 
+	simplyclose=() => {
+		this.props.simplyclose();
+	}
+
+
 	closefp = data => this.setState({
 			...this.state,
 			isOpenfp: data
 		});
-	closesp = data => {
-		this.setState({
-			...this.state,
-			isOpensp: data
-		});
-		this.props.close(false);
-	}
+	
 
 	finalstylefp=()=>{
 		const final = {
@@ -71,26 +68,7 @@ class LoginForm extends React.Component{
 			...this.state,
 			isOpenfp: !this.state.isOpenfp
 		});
-	finalstylesp=()=>{
-		const final = {
-	
-			right: spring(175)
-		};
-		return final;
-	}
 
-	initialstylesp=()=>{
-		const initial = {
-	
-			right: spring(-750)
-		};
-		return initial;
-	}
-
-	changepositionsp = () =>this.setState({
-			...this.state,
-			isOpensp: !this.state.isOpensp
-		});
 
 	validate = (data) => {
 		const errors={};
@@ -103,16 +81,15 @@ class LoginForm extends React.Component{
 
 	render(){
 	
-			const {data,errors,isOpenfp, isOpensp} = this.state;
+			const {data,errors,isOpenfp} = this.state;
 			const stylefp = isOpenfp ?this.finalstylefp() : this.initialstylefp();
-			const stylesp = isOpensp ?this.finalstylesp() : this.initialstylesp();
 	
 		return(
 
 			<div>
-						<div className={s.loginBox}>
-						
-							<img src="user.png" className={s.user} alt="" />
+						<div className={s.loginBox} >
+							<div ><button className={s.close} onClick={this.simplyclose}><i className="fa fa-times" /></button></div>
+
 							
 							<form onSubmit={this.onSubmit}>
 								<p>Email</p>
@@ -144,9 +121,7 @@ class LoginForm extends React.Component{
 								<div onClick={this.changepositionfp} role="presentation" style={{cursor:"pointer"}}> 
 									<p>Forgot Password?</p>
            						</div>
-           						<div onClick={this.changepositionsp} role="presentation" style={{cursor:"pointer"}}> 
-									<p>Sign up</p>
-           						</div>
+           						
 								
 							</form>
 							
@@ -168,23 +143,7 @@ class LoginForm extends React.Component{
 							
 							}
 
-							{	
-							<Motion style={stylesp}>
-										{
-											({right}) =>
-										   <div
-										   		style={{
-										   				right,
-										   				top:'210px',
-										   				position:'absolute'
-										   		}}>
-										   		<SignupPage closesp={this.closesp}/>
-										   	</div>                                      
-
-										}
-							</Motion>		
-							
-							}
+					
 
 
 
@@ -206,7 +165,8 @@ class LoginForm extends React.Component{
 
 LoginForm.propTypes = {
 	submit: PropTypes.func.isRequired,
-	close:PropTypes.func.isRequired
+	close:PropTypes.func.isRequired,
+	simplyclose: PropTypes.func.isRequired
 };
 
 export default withRouter(LoginForm);

@@ -1,6 +1,6 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types';
+import { USER_LOGGED_IN, USER_LOGGED_OUT,USER_DETAILS } from '../types';
 
-export default function user(state={}, action={}){
+export const user=(state={}, action={})=>{
 	switch(action.type){
 		case USER_LOGGED_IN:
 			return action.user;
@@ -8,5 +8,13 @@ export default function user(state={}, action={}){
 			return {};
 		default:
 			return state;
+	}
+}
+
+export const userdetails=(state={}, action={})=>{
+	switch(action.type){
+		case USER_DETAILS:
+			return { ...action.userdetails};
+		default: return state;
 	}
 }

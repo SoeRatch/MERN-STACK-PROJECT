@@ -7,8 +7,8 @@ import s from '../style/Navigation.css';
 
 const Navigation =()=>(
 		<div>
-			<div style={{height:'80px'}} >
-				<Navigationstyle className={[flex.flexRowContainer, s.navigation].join(' ')}>
+			<div className={s.navigation} >
+				<Navigationstyle className={[flex.flexRowContainer,s.nav].join(' ')}>
 						<Title/>
 						<Iconn/>
 				</Navigationstyle>

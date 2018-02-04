@@ -12,12 +12,16 @@ class LoginPage extends React.Component{
 		this.props.history.push("/dashboard");
 	});
 
+	simplyclose =() => {
+		this.props.close(false);
+	};
+
 
 	render(){
 		return(
 				<div>
 					<div>
-					<LoginForm close={this.props.close} submit={this.submit} />
+					<LoginForm close={this.props.close} submit={this.submit} simplyclose={this.simplyclose}/>
 					</div>
 					
 				</div>

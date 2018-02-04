@@ -20,7 +20,8 @@ export function sendConfirmationEmail(user){
 		to: user.email,
 		subject:"Welcome to Pensheel.",
 		text: `
-			Welcome to Pensheel . Please , confirm your email to get started :).
+			Hei, ${user.username} . Welcome to Pensheel . Please , confirm your email with the below address to get started :).
+
 			${user.generateConfirmationUrl()}
 		`
 	}

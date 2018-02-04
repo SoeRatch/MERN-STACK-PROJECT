@@ -1,7 +1,19 @@
+
+
+.navigation{
+
+			height:15vh;
+
+		}
 @media only screen and (max-width: 900px){
 	.navigation{
 
-			height:28.5vh;
+			height:30vh;
+
 		}
-	
 }
+
+
+.nav{
+			box-shadow: 0 8px 6px -6px black;	}
+
