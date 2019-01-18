@@ -1,0 +1,60 @@
+https://codepen.io/choogoor/pen/YWBxAg
+
+image upload feature-> https://codesandbox.io/s/50pp3xlv24
+                    -> https://stackoverflow.com/questions/47604432/how-to-insert-upload-image-update-entity-and-blocks-in-draft-js
+
+ image upload feature ->https://codesandbox.io/s/5w4rp50qkp
+ 					  -> https://stackoverflow.com/questions/46320355/upload-and-render-image-in-draft-js-based-editor
+
+tutorials on drag and drop -> https://www.html5rocks.com/en/tutorials/dnd/basics/
+
+=>webpackusage->https://stackoverflow.com/questions/43049748/invalid-configuration-object-in-webpack
+
+=>teaches how to use eslint with webpack -> https://www.robinwieruch.de/react-eslint-webpack-babel/
+
+
+
+/*
+{
+		      test: /\.jpe?g$|\.gif$|\.png$|\.ttf$|\.eot$|\.svg$/,
+		      use: 'file-loader?name=[name].[ext]?[hash]'
+		    },
+		    {
+		      test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+		      loader: 'url-loader?limit=10000&mimetype=application/fontwoff'
+		    }
+
+*/
+
+=>A very big error on routes - getting cannot found on refreshing solved working on server.js as shown with path . helpful link -> https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#serving-apps-with-client-side-routing
+
+/*
+
+Your mongodb service is probably down. Run sudo service mongod start to start the daemon process
+
+*/
+
+=>nodemailer real emails help -> https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799
+
+
+
+
+=>Uncaught SyntaxError: Unexpected token < and unable to handle routes with params error solved with =>{
+ using 
+	<script src="/app.js"></script>
+	instead of
+	<script src="app.js"></script>
+}
+
+=>https://stackoverflow.com/questions/46384591/node-was-compiled-against-a-different-node-js-version-using-node-module-versio
+
+=>upgrading node - https://stackoverflow.com/questions/42045637/nodemailer-error-cant-fix
+
+=> error on props.history.push solved by using withRouter . error was going to / instead of /dashboard rvrntho this.props.history.push('/dashboard') was used . 
+https://stackoverflow.com/questions/46415297/pass-history-as-props-to-an-event-handler
+
+=> eslint error of ->PropType is defined but prop is never used  react/no-unused-prop-types -> solved by adding -> "react/no-unused-prop-types": [<enabled>, { customValidators: <customValidator>, skipShapeProps: <skipShapeProps> }] ->in eslint rule 
+
+
+=========================================================
+
